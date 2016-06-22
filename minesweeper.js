@@ -7,6 +7,7 @@ function startGame () {
 function addListeners (elements) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', showCell)
+    elements[i].addEventListener('contextmenu', markCell)
   }
 }
 
@@ -14,4 +15,10 @@ function addListeners (elements) {
 function showCell (evt) {
   evt.preventDefault()
   evt.target.classList.toggle('hidden')
+}
+
+// CREATE FUNCTION markell
+function markCell (evt) {
+  evt.preventDefault()
+  evt.target.classList.toggle('marked')
 }
