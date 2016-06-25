@@ -39,6 +39,36 @@ function getSurroundingCells (row, col) {
     })
 }
 
+// Array.includes polyfill
+//fix from Rich to recognise Chrome version 47?
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+    'use strict'
+    var O = Object(this)
+    var len = parseInt(O.length, 10) || 0
+    if (len === 0) {
+      return false
+    }
+    var n = parseInt(arguments[1], 10) || 0
+    var k
+    if (n >= 0) {
+      k = n
+    } else {
+      k = len + n
+      if (k < 0) {k = 0}
+    }
+    var currentElement
+    while (k < len) {
+      currentElement = O[k]
+      if (searchElement === currentElement) { // NaN !== NaN
+        return true
+      }
+      k++
+    }
+    return false
+  }
+}
+
 // For the given DOM element, displays surrounding mine counts
 // under the following conditions:
 //  - cell is not a mine
@@ -72,7 +102,7 @@ function setInnerHTML (cell) {
   if (element.classList.contains('marked')) {
     return
   }
-  element.innerHTML = cell.surroundingMines > 0 ? 
+  element.innerHTML = cell.surroundingMines > 0 ?
     cell.surroundingMines : ''
   if (element.classList.contains('hidden')) {
     element.classList.remove('hidden')

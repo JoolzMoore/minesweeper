@@ -1,3 +1,10 @@
+/* defining the object. Call it board,  place it in global
+scope  - outside  functions. It is an object with one property: cells with empty array.
+*/
+var board = {
+  cells: []
+}
+
 document.addEventListener('DOMContentLoaded', startGame)
 
 function startGame () {
@@ -8,8 +15,14 @@ function addListeners (elements) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', showCell)
     elements[i].addEventListener('contextmenu', markCell)
+    addCellToBoard(element[i])
   }
 }
+
+function addCellToBoard (){
+
+}
+
 
 // CREATE FUNCTION showCell
 function showCell (evt) {
@@ -17,8 +30,33 @@ function showCell (evt) {
   evt.target.classList.toggle('hidden')
 }
 
-// CREATE FUNCTION markell
+// CREATE FUNCTION markCell - using find a digit? \d
 function markCell (evt) {
   evt.preventDefault()
   evt.target.classList.toggle('marked')
 }
+
+   /* Method to get info from cell and extract row-x and col-y class numbers*/
+
+
+function getRow (element) {
+var elementClass =  element.classList
+for (var i = 0; i < elementClass.length; i++) {
+  if  (/row/.test(elementClass[i].item(i))) {
+            //  Extract element row number
+    return parseInt (elementClass[i].item(i).split('-')[i]);
+      //  extrzcting number from string
+       }
+  }
+}
+function getCol (element) {
+    var elementClass =  element.classList
+  for (var i = 0; i < elementClass.length; i++) {
+    if (/col/.test(elementClass[i].item(i))) {
+            //  Extract element row number
+    return parseInt (elementClass[i].item(i).split('-')[i]);
+    }
+  }
+}
+
+
