@@ -15,14 +15,18 @@ function addListeners (elements) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', showCell)
     elements[i].addEventListener('contextmenu', markCell)
-    addCellToBoard(element[i])
+    addCellToBoard(elements[i])
   }
 }
-
-function addCellToBoard (){
-
+// each object corresponds to board
+function addCellToBoard (elements) {
+  var newCell = {
+    row: getRow(elements),
+    col: getCol(elements),
+    isMine: elements.classList.contains("mine")
+  }
+  board.cells.push(newCell)
 }
-
 
 // CREATE FUNCTION showCell
 function showCell (evt) {
@@ -38,25 +42,26 @@ function markCell (evt) {
 
    /* Method to get info from cell and extract row-x and col-y class numbers*/
 
-
-function getRow (element) {
-var elementClass =  element.classList
-for (var i = 0; i < elementClass.length; i++) {
-  if  (/row/.test(elementClass[i].item(i))) {
+function getRow (elements) {
+//*  var elementClass =  element.classList*/
+  for (var i = 0; i < elements.classList.length; i++) {
+    if (/row/.test(elements.classList.item(i))) {
             //  Extract element row number
-    return parseInt (elementClass[i].item(i).split('-')[i]);
-      //  extrzcting number from string
-       }
-  }
-}
-function getCol (element) {
-    var elementClass =  element.classList
-  for (var i = 0; i < elementClass.length; i++) {
-    if (/col/.test(elementClass[i].item(i))) {
-            //  Extract element row number
-    return parseInt (elementClass[i].item(i).split('-')[i]);
+      return parseInt(elements.classList.item(i).split('-')[i]);
+      //  extracting number from string
     }
   }
 }
+function getCol (elements) {
+//*  var elementClass =  element.classList*/
+  for (var i = 0; i < elements.classList.length; i++) {
+        if (/col/.test(elements.classList.item(i))) {
+            //  Extract element col number
+      return parseInt(elements.classList.item(i).split('-')[i]);
+    }
+  }
+}
+
+
 
 
