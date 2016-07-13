@@ -21,7 +21,7 @@ function addListeners (elements) {
   for (var i = 0; i < board.cells.length; i++) {
     //console.log('board')
     board.cells[i].surroundingMines = countMines(board.cells[i])
-    console.log(board.cells[i].surroundingMines)
+    //console.log(board.cells[i].surroundingMines)
   }
 }
 // call the function for each cell or element of array
@@ -63,9 +63,9 @@ function markCell (evt) {
    /* Method to get info from cell and extract row-x and col-y class numbers*/
 function getRow(element) {
    for (var i =0; i < element.classList.length; i++) {
-  var boxes = element.classList[i];
-    if (boxes.indexOf("row") > -1) {
-  var number = boxes.split("-");
+  var extractNo = element.classList[i];
+    if (extractNo.indexOf("row") > -1) {
+  var number = extractNo.split("-");
 //console.log (number[1]);
       return parseInt(number[1]);
     }
@@ -74,34 +74,15 @@ function getRow(element) {
 
 function getCol(element) {
     for (var i=0; i < element.classList.length; i++) {
-    var boxes= element.classList[i];
-    if (boxes.indexOf("col") > -1) {
-    var number = boxes.split("-");
+    var extractNo= element.classList[i];
+    if (extractNo.indexOf("col") > -1) {
+    var number = extractNo.split("-");
 //console.log (number[1]);
     return parseInt(number[1]);
     }
   }
 }
-/*function getRow (elements) {
---*  var elementClass =  element.classList
-  for (var i = 0; i < elements.classList.length; i++) {
-    if (/row/.test(elements.classList.item(i))) {
-            //  Extract element row number
-      return parseInt(elements.classList.item(i).split('-')[i])
-      //  extracting number from string
-    }
-  }
-}
-function getCol (elements) {
-//  var elementClass =  element.classList
-  for (var i = 0; i < elements.classList.length; i++) {
-    if (/col/.test(elements.classList.item(i))) {
-      //  Extract element col number
-      return parseInt(elements.classList.item(i).split('-')[i])
-    }
-  }
-}
-*/
+/
 
 
 
